@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Mac Cayanan",
   "scripts": {
-    "code-challenge": "cypress run --browser chrome --headless --spec cypress/e2e/parabank/ui-tests/code.challenge.cy.js"
+    "code-challenge": "cypress run --browser chrome --headless --spec cypress/e2e/parabank/code.challenge.cy.js"
   },
   "devDependencies": {
     "ajv": "^8.12.0",

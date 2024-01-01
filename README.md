@@ -26,6 +26,7 @@ Use the following prefixes when naming UI Web Elements in your application page 
 | Basic | TabStrip | tab | tabOptions |
 | Basic | Text Area | txa | txaDescription |
 | Basic | Text box | txt | txtLastName |
+| Basic | Header | hdr | hdrCustomerLogin |
 | Complex | Chevron | chv | chvProtocol |
 | Complex | Data grid | dgd | dgdTitles |
 | Complex | Data list | dbl | dblPublisher |

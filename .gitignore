@@ -9,6 +9,7 @@ allure-*/
 
 # Dependency directories
 node_modules/
+package-lock.json
 
 # Typescript v1 declaration files
 !tests/typings

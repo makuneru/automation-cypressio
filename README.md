@@ -1,6 +1,6 @@
-# UI Automation with Cypress
+# UI and API Automation with Cypress
 
-UI Automation with Cypress
+UI and API Automation with Cypress
 
 # UI Web Elements Naming Convention
 

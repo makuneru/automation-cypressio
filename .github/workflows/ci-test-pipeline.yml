@@ -1,18 +1,18 @@
-name: Chrome
+name: Cypress Tests
 
 on: [push, workflow_dispatch]
 
 jobs:
-  chrome:
+  cypress-run:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Chrome
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
         uses: cypress-io/github-action@v6
-        timeout-minutes: 20
         with:
           build: npm run build
           start: npm start
-          browser: chrome
-      -run: npm run code-challenge
+      - run: npm run code-challenge

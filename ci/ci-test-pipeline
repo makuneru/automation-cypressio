@@ -1,17 +1,22 @@
 pipeline {
-  agent {
-    // this image provides everything needed to run Cypress
-    docker {
-      image 'cypress/base:20.9.0'
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/makuneru/automation-cypressio.git'
+            }
+        }
+ 
+        stage('Install NPM Packages') {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                bat 'npm run code-challenge'
+            }
+        }
     }
-  }
-
-  stages {
-    stage('build and test') {
-      steps {
-        sh 'npm ci'
-        sh "npm run code-challenge"
-      }
-    }
-  }
 }

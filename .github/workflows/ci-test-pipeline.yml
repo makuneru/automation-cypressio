@@ -6,8 +6,12 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
+      - name: Set NPM Registry
+        run: npm config set registry https://registry.npmjs.org/
+
       - name: Checkout
         uses: actions/checkout@v4
+
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
@@ -15,4 +19,5 @@ jobs:
         with:
           build: npm run build
           start: npm start
+
       - run: npm run code-challenge

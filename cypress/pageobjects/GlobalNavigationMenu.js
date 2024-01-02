@@ -1,12 +1,12 @@
 class ParabankNavigationComponents {
-  lnkOpenNewAccount = 'a[href="/parabank-3.0.0-SNAPSHOT/openaccount.htm"]';
-  lnkOverview = 'a[href="/parabank-3.0.0-SNAPSHOT/overview.htm"]';
-  lnkTransfer = 'a[href="/parabank-3.0.0-SNAPSHOT/transfer.htm"]';
-  lnkBillPay = 'a[href="/parabank-3.0.0-SNAPSHOT/billpay.htm"]';
-  lnkFindTransactions = 'a[href="/parabank-3.0.0-SNAPSHOT/findtrans.htm"]';
-  lnkUpdateContactInfo = 'a[href="/parabank-3.0.0-SNAPSHOT/updateprofile.htm"]';
-  lnkRequestLoan = 'a[href="/parabank-3.0.0-SNAPSHOT/requestloan.htm"]';
-  lnkLogout = 'a[href="/parabank-3.0.0-SNAPSHOT/logout.htm"]';
+  lnkOpenNewAccount = 'a[href*="openaccount.htm"]';
+  lnkOverview = 'a[href*="overview.htm"]';
+  lnkTransfer = 'a[href*="transfer.htm"]';
+  lnkBillPay = 'a[href*="billpay.htm"]';
+  lnkFindTransactions = 'a[href*="findtrans.htm"]';
+  lnkUpdateContactInfo = 'a[href*="updateprofile.htm"]';
+  lnkRequestLoan = 'a[href*="requestloan.htm"]';
+  lnkLogout = 'a[href*="logout.htm"]';
 
   getlnkOpenNewAccount() {
     return cy.get(this.lnkOpenNewAccount);

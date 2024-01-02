@@ -22,7 +22,7 @@ describe('QA Code Challenge: UI Test Scenario', () => {
   describe('Step 1- 2', () => {
     it('Navigate to parabank app and create new user.', () => {
       username = chance.word({ syllables: 3 });
-      password = chance.integer();
+      password = chance.word({ syllables: 4 });
       cy.log(`Username : ${username}, Password : ${password}`);
       RegistrationPage.doRegister(username, password);
 

@@ -24,6 +24,7 @@ describe('QA Code Challenge: UI Test Scenario', () => {
       username = chance.word({ syllables: 3 });
       password = chance.word({ syllables: 4 });
       cy.log(`Username : ${username}, Password : ${password}`);
+      //register a new user
       RegistrationPage.doRegister(username, password);
 
       //assert successful registration
@@ -37,6 +38,7 @@ describe('QA Code Challenge: UI Test Scenario', () => {
 
   describe('Step 4 - 9', () => {
     beforeEach('Step 3 - Login using the created user.', () => {
+      //do login for before each test
       LoginPage.doLogin(username, password);
       //assert successful login
       cy.get(HomePage.btnHome).should('exist');
@@ -69,31 +71,35 @@ describe('QA Code Challenge: UI Test Scenario', () => {
     });
 
     it('Create a savings account.', () => {
+      //Navigate to Open New Account Page
       GlobalNavigationMenu.getlnkOpenNewAccount().click();
       cy.get(OpenNewAccountPage.ddlAccountType).select('1').contains('SAVINGS');
       cy.get(OpenNewAccountPage.btnOpenNewAccount).click();
       cy.get(OpenNewAccountPage.ttlAccountOpened).should('contain', 'Account Opened!');
 
+      //additional step to store the value of newly created account
       cy.get(OpenNewAccountPage.lnkNewAccountId)
         .invoke('text')
         .then((text) => {
-          newAccount = text.trim(); // Store the text content in the variable newAccount
+          newAccount = text.trim();
           cy.log(`Created Savings Account Number is ${newAccount}`);
         });
     });
 
     it('Validate Accounts Overview Page.', () => {
+      //Navigate to Accounts Overview Page
       GlobalNavigationMenu.getlnkOverview().click();
-      AccountsOverviewPage.getddlAccountByAccountNumber(newAccount).then(($link) => {
+      AccountsOverviewPage.getlnkAccountByAccountNumber(newAccount).then(($link) => {
+        //get the element value for Balance and Available Amount of the newly created account
         const adjacentTdElements = $link.parent().nextAll('td.ng-binding').slice(0, 2);
         const tdTexts = adjacentTdElements.map((index, element) => Cypress.$(element).text().trim()).get();
 
-        // Assert that both <td> elements for Balance and Available Amount contain '$100.00'
-        cy.log(`Texts in the adjacent <td> elements Balance and AVailable Amount are: ${tdTexts}`);
+        // Assert that both elements for Balance and Available Amount contain '$100.00'
+        cy.log(`Texts in the adjacent elements Balance and AVailable Amount are: ${tdTexts}`);
         cy.wrap(tdTexts)
           .should('deep.eq', [BALANCE, BALANCE])
           .then(() => {
-            AccountsOverviewPage.getddlAccountByAccountNumber(newAccount).click();
+            AccountsOverviewPage.getlnkAccountByAccountNumber(newAccount).click();
 
             //assert account overview page
             cy.get(AccountsOverviewPage.ttlAccountDetails).should('exist').contains('Account Details');
@@ -106,6 +112,7 @@ describe('QA Code Challenge: UI Test Scenario', () => {
     });
 
     it('Transfer funds from new account to another account.', () => {
+      //Navigate to Transfer Funds
       GlobalNavigationMenu.getlnkTransferFunds().click();
       const AMOUNT = '50';
       cy.get(TransferFundsPage.txtAmount).type(AMOUNT);
@@ -119,10 +126,11 @@ describe('QA Code Challenge: UI Test Scenario', () => {
           oldAccount = $option.val();
           cy.log(`Old Account: ${oldAccount}`);
 
+          //do transfer
           cy.get(TransferFundsPage.btnTransfer).click();
-          cy.get(TransferFundsPage.ttlTransferComplete).should('exist').contains('Transfer Complete');
 
           //assert successful fund transfer
+          cy.get(TransferFundsPage.ttlTransferComplete).should('exist').contains('Transfer Complete');
           cy.get(TransferFundsPage.lblAmount).should('exist').contains(AMOUNT);
           cy.get(TransferFundsPage.lblFromAccountId).should('exist').contains(newAccount);
           cy.get(TransferFundsPage.lblToAccountId).should('exist').contains(oldAccount);
@@ -130,7 +138,10 @@ describe('QA Code Challenge: UI Test Scenario', () => {
     });
 
     it('Pay the bill using created account.', () => {
+      //Navigate to Bill Pay
       GlobalNavigationMenu.getlnkBillPay().click();
+
+      //Enter Payee Information
       const AMOUNT = chance.floating({ min: 0, max: 50, fixed: 2 });
       amountToFind = AMOUNT;
       const BILLING_ACCOUNT = chance.integer({ min: 10000, max: 99999 });
@@ -158,10 +169,10 @@ describe('QA Code Challenge: UI Test Scenario', () => {
 
 describe('QA Code Challenge: API Test Scenario', () => {
   it('Search the transaction using "Find Transactions" API call by Amount for the payment made.', () => {
+    //Prepare Request Config
     cy.request({
       method: 'GET',
-      url: `/services/bank/accounts/${newAccount}/transactions/amount/${amountToFind}`,
-      headers: { accept: 'application/json', 'Content-Type': 'application/json' }
+      url: `/services/bank/accounts/${newAccount}/transactions/amount/${amountToFind}`
     }).then((response) => {
       //assert the res status and body
       expect(response.status).to.eq(200);

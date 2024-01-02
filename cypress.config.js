@@ -1,6 +1,10 @@
 const { defineConfig } = require('cypress');
 require('dotenv').config();
 
+const BASE_URL =
+  process.env.LOCAL_RUN === 'true'
+    ? 'http://localhost:8080/parabank-3.0.0-SNAPSHOT'
+    : 'https://parabank.parasoft.com/parabank';
 module.exports = defineConfig({
   retries: {
     runMode: 1,
@@ -21,10 +25,7 @@ module.exports = defineConfig({
     PB_PASSWORD: process.env.PB_PASSWORD
   },
   e2e: {
-    baseUrl:
-      process.env.LOCAL_RUN === 'true'
-        ? 'http://localhost:8080/parabank-3.0.0-SNAPSHOT'
-        : 'https://parabank.parasoft.com/parabank',
+    baseUrl: BASE_URL,
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
     }

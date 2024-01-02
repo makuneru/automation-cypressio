@@ -6,7 +6,7 @@ class AccountsOverview {
   lblBalance = 'td#balance';
   lblAvailableBalance = 'td#availableBalance';
 
-  getddlAccountByAccountNumber(accountNumber) {
+  getlnkAccountByAccountNumber(accountNumber) {
     return cy.get(`a[href*="activity.htm?id=${accountNumber}"]`);
   }
 }

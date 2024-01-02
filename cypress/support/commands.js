@@ -24,4 +24,17 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+Cypress.Commands.overwrite('request', (originalFn, options) => {
+  const modifiedOptions = {
+    ...options,
+    headers: {
+      ...options.headers,
+      accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+  return originalFn(modifiedOptions);
+});
+
 /// <reference types="cypress" />

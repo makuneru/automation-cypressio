@@ -2,6 +2,14 @@ const { defineConfig } = require('cypress');
 require('dotenv').config();
 
 module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'custom-title',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+    saveAllAttempts: false
+  },
   chromeWebSecurity: false,
   screenshotOnRunFailure: true,
   env: {
@@ -10,7 +18,9 @@ module.exports = defineConfig({
   },
   e2e: {
     baseUrl: 'http://localhost:8080/parabank-3.0.0-SNAPSHOT',
-    setupNodeEvents(on, config) {}
+    setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+    }
   },
   defaultCommandTimeout: 10000
 });

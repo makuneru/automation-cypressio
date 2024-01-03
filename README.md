@@ -2,7 +2,7 @@
 
 This repository contains UI and API Test Automation scripts for [Parabank Application](https://parabank.parasoft.com). Parabank is a realistic online banking application that facilitates fund transaction management.
 
-**Note:** If the [Parabank Application](https://parabank.parasoft.com) is not up and running, deploy the pre built parabank app [github repo for reference](https://github.com/parasoft/parabank) `parabank-3.0.0-SNAPSHOT.war` located in the root directory using an [Apache Tomcat](https://tomcat.apache.org/download-90.cgi) container.
+**Note:** If the [Parabank Application](https://parabank.parasoft.com) is not up and running, deploy the pre built parabank app [(github repo for reference)](https://github.com/parasoft/parabank) `parabank-3.0.0-SNAPSHOT.war` located in the root directory using an [Apache Tomcat](https://tomcat.apache.org/download-90.cgi) container.
 
 ## Built With
 

@@ -1,6 +1,23 @@
 # UI and API Automation with Cypress
 
-UI and API Automation with Cypress
+This repository contains UI and API Test Automation scripts for [Parabank Application](https://parabank.parasoft.com). Parabank is a realistic online banking application that facilitates fund transaction management.
+
+**Note:** If the [Parabank Application](https://parabank.parasoft.com) is not up and running, deploy the pre built parabank app [github repo for reference](https://github.com/parasoft/parabank) `parabank-3.0.0-SNAPSHOT.war` located in the root directory using an [Apache Tomcat](https://tomcat.apache.org/download-90.cgi) container.
+
+## Built With
+
+- [Cypress](https://www.cypress.io/) - With Cypress, you can easily create tests for your modern web applications, debug them visually, and automatically run them in your continuous integration builds.
+
+## Setup
+
+1. Download and install [Node.js (LTS)](https://nodejs.org/en/download/)
+2. Download and install [Visual Studio Code](https://code.visualstudio.com/download)
+3. Open Visual Studio Code
+4. Clone this project repository
+5. Open a new terminal
+6. Install all dependencies using `npm install`
+7. Run all tests using the command: `npm run code-challenge`
+   **Note:** add LOCAL_RUN=true command if parabank app is running locally. `LOCAL_RUN=true npm run test-challenge`
 
 # UI Web Elements Naming Convention
 
